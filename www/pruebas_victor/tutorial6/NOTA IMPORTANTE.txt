@@ -1,0 +1,7 @@
+Falta crear en la base de datos una tabla de nombre "prueba_victor" con las columnas: 
+
+"building_id" Identificador único
+"building_name" Nombre de edificio (nombre del poi)"
+"building_description" Descripcion del poi
+"latitude" Latitud del poi
+"longitude" Longitud del poi

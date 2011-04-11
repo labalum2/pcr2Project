@@ -1,0 +1,40 @@
+<?php
+
+include("Database.lib");
+class Film{
+
+private $db;
+private $sLang;
+
+function __construct($sLang) {
+	$this->db = new Database();
+	$this->sLanguage = $sLang;
+}
+
+//Pendiente, repasar sentencias SQL como Union para hacerlo de manera más sencilla...
+function getActors(){
+	$conexion = $this->dataBase->connect();
+	//Obtener el código de película
+	
+	
+	//Se obtiene id de la película ..
+	$consulta = "SELECT codAct FROM Actor_Pelicula WHERE codPel = '$pelicula'";
+	$resultado = $this->dataBase->consultation($consulta,$conexion);
+	if($resultado){
+		while($row = mysql_fetch_array($resultado)) {
+			$user[$i]["usuario"] = $row["nick"];
+			$user[$i]["ip"] = $row["ip"];
+			$user[$i]["language"] = $row["languageAlerts"];
+			$i = $i+1;
+		}	
+	}
+	return $sActors;
+}
+
+
+}
+
+
+?>
+		
+		

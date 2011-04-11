@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results trackingurl="http://www.junaio.com/publisherDownload/tutorial/tracking_tutorial.xml_enc">
+<poi id="1" interactionfeedback="click">
+	<name><![CDATA[Los Increibles]]></name>
+	<!-- <description><![CDATA[[Los Increibles modelo 3D]]></description> -->  
+	<author>Victor</author>
+	<date/>
+	<translation>0.0,0.0,0.0</translation>
+	<o>1.5708,0,1.5708</o>
+	<mime-type>model/md2</mime-type>
+	<mainresource>http://www.junaio.com/publisherDownload/tutorial/metaioman.md2_enc</mainresource>
+	<minaccuracy>2</minaccuracy>
+	<route>false</route>
+	<s>1</s>
+	<force3d>true</force3d>
+	<resources>
+		<resource>http://www.junaio.com/publisherDownload/tutorial/metaioman.png</resource> 
+	</resources>
+	<behaviours>
+		<behaviour type="idle">
+			<length>0</length>
+			<node_id>idle</node_id>
+		</behaviour>
+		<behaviour type="click">
+			<length>0</length>
+			<node_id>idle</node_id>
+		</behaviour> 
+	</behaviours>
+</poi>
+
+</results>

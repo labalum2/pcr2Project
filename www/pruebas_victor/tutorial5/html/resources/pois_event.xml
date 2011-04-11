@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><results>
+<poi id="5" interactionfeedback="click">
+<name><![CDATA[Un globo]]></name>
+<description><![CDATA[[Ataque de ovnis]]></description> 
+<author>Victor</author>
+<l>40.332766,-3.765409,0</l>
+<o>0,0,0</o>
+<mime-type>model/md2</mime-type>
+<mainresource>http://www.junaio.com/publisherDownload/tutorial/balloon.md2_enc</mainresource>
+<route>false</route>
+<s>30</s>
+<force3d>true</force3d>
+<resources>
+	<resource>http://www.junaio.com/publisherDownload/tutorial/balloon.png</resource> 
+</resources>
+<behaviours>
+	<behaviour type="idle">
+		<length>0</length>
+		<node_id>action</node_id>
+	</behaviour> 
+</behaviours>
+</poi>
+</results>

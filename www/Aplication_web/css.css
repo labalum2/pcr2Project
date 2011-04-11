@@ -1,0 +1,7 @@
+#menu {
+st-style: none;
+}
+#menu li {
+display: inline;
+margin-right:5em;
+}
