@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
 <script language="JavaScript">
-document.write('<link href="css.css" rel="stylesheet" type="text/css"/>');
+document.write('<link href="css.css" rel="stylesheet" type="text/css" media="handheld"/>');
 </script>
 <?php
 $language="es";
@@ -17,6 +17,7 @@ $codFilm=$_GET;
 
 
 ?>
+SUPERPRUEBA
   <title>Transformers</title>
 </head>
 <body>

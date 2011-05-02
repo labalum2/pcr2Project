@@ -6,29 +6,162 @@ class Film{
 private $db;
 private $sLang;
 
-function __construct($sLang) {
+/*
+ * Constructor
+ */
+function __construct() {
 	$this->db = new Database();
-	$this->sLanguage = $sLang;
+	//$this->sLanguage = $sLang;
 }
 
-//Pendiente, repasar sentencias SQL como Union para hacerlo de manera más sencilla...
-function getActors(){
-	$conexion = $this->dataBase->connect();
-	//Obtener el código de película
-	
-	
-	//Se obtiene id de la película ..
-	$consulta = "SELECT codAct FROM Actor_Pelicula WHERE codPel = '$pelicula'";
-	$resultado = $this->dataBase->consultation($consulta,$conexion);
+/**
+ * Función para obtener toda la información de una pelicula 
+ */
+function getFilmInfo($idFilm){
+	//Conexión con la base de datos.
+	$conexion = $this->db->connect(); 
+	//Consulta para obtener artistas asociados a esa película y sus datos.
+	$consulta = "SELECT * FROM pelicula WHERE codpel = '".$idFilm."'";
+	$resultado = $this->db->consultation($consulta,$conexion);
 	if($resultado){
-		while($row = mysql_fetch_array($resultado)) {
-			$user[$i]["usuario"] = $row["nick"];
-			$user[$i]["ip"] = $row["ip"];
-			$user[$i]["language"] = $row["languageAlerts"];
+		$row = mysql_fetch_array($resultado);
+		$aFilm["tittle"] = $row["titulo"];
+		$aFilm["icon"] = $row["icono"];
+		$aFilm["synopsis"] = $row["sinop_ext"];
+		$aFilm["url"] = $row["url"];
+		$aFilm["inCinema"] = $row["encine"];
+	}else{
+		$aFilm = null;
+	}
+	//Desconexión Base de datos.
+	$this->db->disconnect($conexion);
+	return $aFilm;
+}
+
+/**
+ * Función para obtener el tituto de una pelicula
+ */
+function getTittle($idFilm){
+	//Conexión con la base de datos.
+	$conexion = $this->db->connect(); 
+	//Consulta para obtener artistas asociados a esa película y sus datos.
+	$consulta = "SELECT titulo FROM pelicula WHERE codpel = '".$idFilm."'";
+	$resultado = $this->db->consultation($consulta,$conexion);
+	if($resultado){
+		$row = mysql_fetch_array($resultado);
+		$tittle = $row["titulo"];
+	}else{
+		$tittle = null;
+	}
+	//Desconexión Base de datos.
+	$this->db->disconnect($conexion);
+	return $tittle;
+}
+
+/**
+ * Función para obtener toda la sinopsis de una pelicula
+ */
+function getSynopsis($idFilm){
+	//Conexión con la base de datos.
+	$conexion = $this->db->connect(); 
+	//Consulta para obtener artistas asociados a esa película y sus datos.
+	$consulta = "SELECT sinop_ext FROM pelicula WHERE codpel = '".$idFilm."'";
+	$resultado = $this->db->consultation($consulta,$conexion);
+	if($resultado){
+		$row = mysql_fetch_array($resultado);
+		$sinopsis = $row["sinop_ext"];
+	}else{
+		$sinopsis = null;
+	}
+	//Desconexión Base de datos.
+	$this->db->disconnect($conexion);
+	return $sinopsis;
+}
+
+/**
+ * Función para obtener el listado de actores que participan en una película
+ */
+function getActors($idFilm){
+	//Conexión con la base de datos.
+	$conexion = $this->db->connect(); 
+	//Consulta para obtener artistas asociados a esa película y sus datos.
+	$consulta = "SELECT * from artista_Pel as p, artista as a WHERE a.codArt=p.codArt and p.codPel='".$idFilm."'";
+	$resultado = $this->db->consultation($consulta,$conexion);
+	$i=0;
+	if($resultado){
+		//varios artistas
+		while($row = mysql_fetch_array($resultado)) { 
+			$aArtists[$i]["idArtist"] = $row["codArt"];
+			$aArtists[$i]["name"] = $row["nombre"];
+			$aArtists[$i]["surname"] = $row["apellidos"];
+			$aArtists[$i]["web"] = $row["web"];
+			$aArtists[$i]["image"] = $row["foto"];
+			$aArtists[$i]["role"] = $row["papel"];
 			$i = $i+1;
 		}	
+	
 	}
-	return $sActors;
+	//Desconexión Base de datos.
+	$this->db->disconnect($conexion);
+	return $aArtists;
+}
+
+/**
+ * Función para obtener la información de un actor
+ */
+function getActorInfo($idActor){
+	//Conexión con la base de datos.
+	$conexion = $this->db->connect(); 
+	//Consulta para obtener artistas asociados a esa película y sus datos.
+	$consulta = "SELECT * FROM artista WHERE codArt = '".$idActor."'";
+	$resultado = $this->db->consultation($consulta,$conexion);
+	if($resultado){
+		$row = mysql_fetch_array($resultado);
+		$aArtist["name"] = $row["nombre"];
+		$aArtist["surname"] = $row["apellidos"];
+		$aArtist["web"] = $row["web"];
+		$aArtist["image"] = $row["foto"];
+	}else{
+		$aArtist = null;
+	}
+	//Desconexión Base de datos.
+	$this->db->disconnect($conexion);
+	return $aArtist;
+}
+
+
+/**
+ * Función para obtener los recursos multimedia de una pelicula.
+ */
+function getMedia($idPelicula){
+	//Conexión con la base de datos.
+	$conexion = $this->db->connect(); 
+	//Consulta para obtener artistas asociados a esa película y sus datos.
+	$consulta = "SELECT * from media_pel as mp, media as m, tipo_media as tm WHERE mp.codMedia=m.codMedia and m.idTipo=tm.codTipMedia and mp.codPel='".$idFilm."'";
+	$resultado = $this->db->consultation($consulta,$conexion);
+	$i=0;
+	if($resultado){
+		while($row = mysql_fetch_array($resultado)){
+			//$aMedias[$i]["name"] = $row["nombre"];
+			/*if(preg_match("/(\w+)$/", $row["ubicacion"], $case){
+				if($case="mp4"){ //video
+					$aMedias[$i]["ext"] = 2;
+				elseif($case="mp3"){ //música
+					$aMedias[$i]["ext"] = 1;
+				}
+			}*/
+			$aMedias[$i]["path"] = $row["ubicacion"];
+			$aMedias[$i]["size"] = $row["size"];
+			$aMedias[$i]["type"] = $row["tipo"];
+			$aMedias[$i]["remote"] = $row["is_remote"];
+			$i = $i+1;
+		}
+	}else{
+		$aMedias = null;
+	}
+	//Desconexión Base de datos.
+	$this->db->disconnect($conexion);
+	return $aMedias;
 }
 
 
@@ -36,5 +169,3 @@ function getActors(){
 
 
 ?>
-		
-		
